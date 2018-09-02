@@ -14,9 +14,13 @@
  *= require_self
  */
 
+.frontpage {
+  font-size: 18px;
 
 
- .container {
+}
+
+.container {
    width: 800px;
    background-color: white;
    margin: 0 auto;
@@ -42,6 +46,16 @@
   color: Green;
   text-decoration: underline;
 
+}
+
+#tablelink a {
+  font-size: 20px;
+  color: Green;
+  text-decoration: underline;
+}
+
+#tablelink a:hover {
+  background-color: white;
 }
 
 .welcome {

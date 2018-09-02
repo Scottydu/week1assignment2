@@ -4,7 +4,17 @@ class FoodItemsController < ApplicationController
   # GET /food_items
   # GET /food_items.json
   def index
-    @food_items = FoodItem.all
+    if params[:name]
+      @food_items = FoodItem.where('name LIKE ?', "%#{params[:name]}%")
+    elsif
+      @food_items = FoodItem.order(sort_column + ' ' + sort_direction)
+    else
+      @food_items = FoodItem.all
+    end
+
+
+
+
   end
 
   # GET /food_items/1
@@ -71,4 +81,15 @@ class FoodItemsController < ApplicationController
     def food_item_params
       params.require(:food_item).permit(:name, :description, :price, :section, :image)
     end
-end
+
+    def sort_column
+      # params[:sort] || "name"
+      FoodItem.column_names.include?(params[:sort]) ? params[:sort] : "name"
+
+    end
+
+    def sort_direction
+      # params[:direction] || "asc"
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
+  end

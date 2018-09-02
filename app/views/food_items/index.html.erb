@@ -1,14 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<h1 align=center>Menu</h1>
+<h1 align="center">Menu</h1>
 
+<div align="center"><p>Search for a menu item by name. Case counts:</p>
+<%= form_tag(food_items_path, method: :get) do %>
+<%= text_field_tag :name, params[:name] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %></div>
+<br><br>
 <div class = menu><table>
   <thead>
-    <tr class="menulabel">
-      <th>Menu Item</th>
+    <tr class="menulabel" id="tablelink">
+      <th><%= sortable "name" %></th>
       <th>Description</th>
-      <th>Price</th>
-      <th>Section</th>
+      <th><%= sortable "price" %></th>
+      <th><%= sortable "section" %></th>
       <th>Photo</th>
       <th colspan="3"></th>
     </tr>
@@ -16,8 +22,6 @@
 
   <tbody>
     <% @food_items.each do |food_item| %>
-    <% if food_item.section == "Drink" %>
-
         <tr>
           <td width='120px'><b><a href="food_items/<%= food_item.id %>"><%= food_item.name %></a></b></td>
           <td width='250px'><%= food_item.description %></td>
@@ -26,48 +30,6 @@
           <td width='200px' align='center'><img src="<%= food_item.image %>" width="150px" height="120px"></td>
         </tr>
     <% end %>
-    <% end %>
-
-    <% @food_items.each do |food_item| %>
-    <% if food_item.section == "Breakfast" %>
-
-      <tr>
-        <td width='120px'><b><a href="food_items/<%= food_item.id %>"><%= food_item.name %></a></b></td>
-        <td width='250px'><%= food_item.description %></td>
-        <td width='50px' align='center'><%= food_item.price %></td>
-        <td width='100px' align='center'><%= food_item.section %></td>
-        <td width='200px' align='center'><img src="<%= food_item.image %>" width="150px" height="120px"></td>
-      </tr>
-    <% end %>
-    <% end %>
-
-    <% @food_items.each do |food_item| %>
-    <% if food_item.section == "Lunch" %>
-
-        <tr>
-          <td width='120px'><b><a href="food_items/<%= food_item.id %>"><%= food_item.name %></a></b></td>
-          <td width='250px'><%= food_item.description %></td>
-          <td width='50px' align='center'><%= food_item.price %></td>
-          <td width='100px' align='center'><%= food_item.section %></td>
-          <td width='200px' align='center'><img src="<%= food_item.image %>" width="150px" height="120px"></td>
-        </tr>
-    <% end %>
-    <% end %>
-
-    <% @food_items.each do |food_item| %>
-    <% if food_item.section == "Dinner" %>
-
-        <tr>
-          <td width='120px'><b><%= food_item.name %></b></td>
-          <td width='250px'><%= food_item.description %></td>
-          <td width='50px' align='center'><%= food_item.price %></td>
-          <td width='100px' align='center'><%= food_item.section %></td>
-          <td width='200px' align='center'><img src="<%= food_item.image %>" width="150px" height="120px"></td>
-        </tr>
-    <% end %>
-    <% end %>
-
-
   </tbody>
 </table></div>
 
